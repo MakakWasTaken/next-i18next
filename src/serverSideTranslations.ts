@@ -10,7 +10,7 @@ import { UserConfig, SSRConfig } from './types'
 import { getFallbackForLng, unique } from './utils'
 import { Module, Namespace } from 'i18next'
 
-let DEFAULT_CONFIG_PATH = './next-i18next.config.js'
+let CONFIG_FILES = ['next-i18next.config.js', 'next-i18next.config.mjs']
 
 /**
  * One line expression like `const { I18NEXT_DEFAULT_CONFIG_PATH: DEFAULT_CONFIG_PATH = './next-i18next.config.js' } = process.env;`
@@ -19,7 +19,7 @@ let DEFAULT_CONFIG_PATH = './next-i18next.config.js'
  * @see https://github.com/i18next/next-i18next/pull/2084#issuecomment-1420511358
  */
 if (process.env.I18NEXT_DEFAULT_CONFIG_PATH) {
-  DEFAULT_CONFIG_PATH = process.env.I18NEXT_DEFAULT_CONFIG_PATH
+  CONFIG_FILES = [process.env.I18NEXT_DEFAULT_CONFIG_PATH]
 }
 
 type ArrayElementOrSelf<T> = T extends ReadonlyArray<infer U> ? U[] : T[]
@@ -41,16 +41,20 @@ export const serverSideTranslations = async (
   }
 
   let userConfig = configOverride
-  const configPath = path.resolve(DEFAULT_CONFIG_PATH)
+  const configFilePath = CONFIG_FILES.find((file) => fs.existsSync(`./${file}`))
 
-  if (!userConfig && fs.existsSync(configPath)) {
-    userConfig = await import(configPath)
-  }
+  if (configFilePath) {
+    const configPath = path.resolve(configFilePath)
 
-  if (userConfig === null) {
-    throw new Error(
-      `next-i18next was unable to find a user config at ${configPath}`
-    )
+    if (!userConfig && fs.existsSync(configPath)) {
+      userConfig = await import(configPath)
+    }
+  
+    if (userConfig === null) {
+      throw new Error(
+        `next-i18next was unable to find a user config at ${configPath}`
+      )
+    }
   }
 
   const config = createConfig({
