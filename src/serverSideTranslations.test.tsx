@@ -81,7 +81,7 @@ describe('serverSideTranslations', () => {
         } as UserConfig
       )
 
-      expect(fs.existsSync).toHaveBeenCalledTimes(4)
+      expect(fs.existsSync).toHaveBeenCalledTimes(5)
       expect(fs.existsSync).toHaveBeenCalledWith(
         expect.stringMatching('/public/locales/en-US')
       )
@@ -114,7 +114,7 @@ describe('serverSideTranslations', () => {
         } as UserConfig
       )
 
-      expect(fs.existsSync).toHaveBeenCalledTimes(6)
+      expect(fs.existsSync).toHaveBeenCalledTimes(7)
       expect(fs.existsSync).toHaveBeenCalledWith(
         expect.stringMatching('/public/locales/en-US')
       )
@@ -160,7 +160,7 @@ describe('serverSideTranslations', () => {
         } as UserConfig
       )
 
-      expect(fs.existsSync).toHaveBeenCalledTimes(8)
+      expect(fs.existsSync).toHaveBeenCalledTimes(9)
       expect(fs.readdirSync).toHaveBeenCalledTimes(6)
       expect(fs.readdirSync).toHaveBeenCalledWith(
         expect.stringMatching('/public/locales/en-US')
@@ -212,7 +212,7 @@ describe('serverSideTranslations', () => {
         } as UserConfig
       )
 
-      expect(fs.existsSync).toHaveBeenCalledTimes(6)
+      expect(fs.existsSync).toHaveBeenCalledTimes(7)
       expect(fs.readdirSync).toHaveBeenCalledTimes(4)
       expect(fs.readdirSync).toHaveBeenCalledWith(
         expect.stringMatching('/public/locales/en-US')
@@ -252,7 +252,7 @@ describe('serverSideTranslations', () => {
         ['en-US', 'fr-BE', 'fr-BE']
       )
 
-      expect(fs.existsSync).toHaveBeenCalledTimes(7)
+      expect(fs.existsSync).toHaveBeenCalledTimes(8)
       expect(fs.readdirSync).toHaveBeenCalledTimes(5)
       expect(fs.readdirSync).toHaveBeenCalledWith(
         expect.stringMatching('/public/locales/de-CH')
@@ -304,7 +304,7 @@ describe('serverSideTranslations', () => {
         false
       )
 
-      expect(fs.existsSync).toHaveBeenCalledTimes(6)
+      expect(fs.existsSync).toHaveBeenCalledTimes(7)
       expect(fs.readdirSync).toHaveBeenCalledTimes(4)
       expect(fs.readdirSync).toHaveBeenCalledWith(
         expect.stringMatching('/public/locales/de')
